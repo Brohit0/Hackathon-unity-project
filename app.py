@@ -10,16 +10,31 @@ app=Flask(__name__)
 api=Api(app)
 # Define the mock dialog to be returned as json
 dialogTextToReturn = [
-    { "samplePosition": 0, "character": "Ol Red", "fromUser": False, "textStatement": "I've been where I've been I reckon" },
-    { "samplePosition": 0, "character": "Ol Red", "fromUser": True, "textStatement": "Well hello there Ol Red, how have you been?"}
+    {
+        "samplePosition": 0,
+        "character": "Ol Red",
+        "fromUser": False,
+        "textStatement": "I've been where I've been I reckon"
+    },
+    {
+        "samplePosition": 0,
+        "character": "Ol Red",
+        "fromUser": True,
+        "textStatement": "Well hello there Ol Red, how have you been?"
+    }
 ]
+#dialogTextToReturn = {
+#    "samplePosition": 0, "character": "Ol Red", "fromUser": False, "textStatement": "I've been where I've been I reckon",
+#    "samplePosition": 0, "character": "Ol Red", "fromUser": True, "textStatement": "Well hello there Ol Red, how have you been?"
+#}
+
 whisperUrl = "https://whisper.lablab.ai/asr"
 
 @app.route('/api/getDialogText', methods=['GET'])
 def get_data():
     # Return the dialog text as a JSON object
-    unityJson = {"list": dialogTextToReturn}
-    return jsonify(unityJson)
+    #unityJson = {"list": dialogTextToReturn}
+    return jsonify(dialogTextToReturn)
 
 # Recieves a user's dialog in terms of audio that is wav encoded, along with the audio sequence and character information.
 @app.route("/processWithAI", methods=["POST"])
